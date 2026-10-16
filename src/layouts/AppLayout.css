@@ -1,0 +1,20 @@
+header {
+    padding: 8px 10px;
+    border-bottom: 1px solid black;
+}
+
+nav ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
+
+
+nav .nav-link {
+    color: blueviolet;
+}
+
+nav .active{
+    color: red;
+}
