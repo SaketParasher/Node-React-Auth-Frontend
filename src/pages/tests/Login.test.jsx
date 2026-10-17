@@ -43,7 +43,7 @@ describe('Login', () => {
         )
 
         await user.click(
-            screen.getByRole('button', { name: /submit/i })
+            screen.getByRole('button', { name: /Login/i })
         )
 
         await waitFor(() => {
@@ -83,7 +83,7 @@ describe('Login', () => {
         )
 
         await user.click(
-            screen.getByRole('button', { name: /submit/i })
+            screen.getByRole('button', { name: /Login/i })
         )
 
         expect(
