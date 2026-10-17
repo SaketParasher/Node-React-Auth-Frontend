@@ -1,57 +1,86 @@
-import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import './AppLayout.css'
 import { useAuth } from '../context/AuthContext'
 
 const AppLayout = () => {
-    const { isAuthenticated, logout, user } = useAuth()
-    const isAdmin = user?.role === 'admin'
+    const { isAuthenticated, logout } = useAuth()
 
     return (
-        <>
-            <header>
-                <nav>
-                    <ul>
+        <div className="app-shell">
+            <header className="main-header">
+                <nav className="main-nav">
+                    <div className="brand">
+                        React Node Auth
+                    </div>
+
+                    <ul className="nav-list">
                         <li>
-                            <NavLink to="/"
-                                className={({ isActive }) => isActive ? 'active' : 'nav-link'}>
+                            <NavLink
+                                to="/"
+                                end
+                                className={({ isActive }) =>
+                                    isActive ? 'nav-link active' : 'nav-link'
+                                }
+                            >
                                 Dashboard
                             </NavLink>
                         </li>
+
                         <li>
-                            <NavLink to="/profile"
-                                className={({ isActive }) => isActive ? 'active' : 'nav-link'}>
+                            <NavLink
+                                to="/profile"
+                                className={({ isActive }) =>
+                                    isActive ? 'nav-link active' : 'nav-link'
+                                }
+                            >
                                 Profile
                             </NavLink>
                         </li>
+
                         <li>
-                            <NavLink to="/api-playground"
-                                className={({ isActive }) => isActive ? 'active' : 'nav-link'}>
-                                Api Playground
+                            <NavLink
+                                to="/api-playground"
+                                className={({ isActive }) =>
+                                    isActive ? 'nav-link active' : 'nav-link'
+                                }
+                            >
+                                API Playground
                             </NavLink>
                         </li>
-                        {/* {isAdmin && */}
+
                         <li>
-                            <NavLink to="/admin"
-                                end
-                                className={({ isActive }) => isActive ? 'active' : 'nav-link'}>
+                            <NavLink
+                                to="/admin"
+                                className={({ isActive }) =>
+                                    isActive ? 'nav-link active' : 'nav-link'
+                                }
+                            >
                                 Admin
                             </NavLink>
                         </li>
-                        {/* } */}
-                        {isAuthenticated &&
+
+                        {isAuthenticated && (
                             <li>
-                                <button onClick={logout}>Logout</button>
+                                <button
+                                    className="logout-btn"
+                                    onClick={logout}
+                                >
+                                    Logout
+                                </button>
                             </li>
-                        }
+                        )}
                     </ul>
                 </nav>
             </header>
-            <main>
+
+            <main className="main-content">
                 <Outlet />
             </main>
-            <footer> 🚀🚀 React Node Auth App -  @Copyright 2026</footer>
-        </>
+
+            <footer className="app-footer">
+                🚀 React Node Auth App · © 2026
+            </footer>
+        </div>
     )
 }
 

@@ -72,7 +72,7 @@ export function AuthProvider({ children }) {
             }
         } catch (error) {
             console.log("Error in Login ", error)
-            throw new Error('Unexpected Error at Server!')
+            throw new Error(`Unexpected Error at Server!`, { cause: error })
         } finally {
             setIsLoading(false)
         }
@@ -105,7 +105,7 @@ export function AuthProvider({ children }) {
             }
         } catch (error) {
             console.log("Error in Signup ", error)
-            throw new Error('Unexpected Error at Server!')
+            throw new Error(`Unexpected Error at Server!`, { cause: error })
         } finally {
             setIsLoading(false)
         }
@@ -122,7 +122,6 @@ export function AuthProvider({ children }) {
                 method: 'POST',
                 credentials: 'include'
             })
-            const json = await response.json()
             if (response.ok) {
                 setIsAuthenticated(false)
                 setUser(null)
@@ -150,6 +149,7 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
     const authContext = useContext(AuthContext);
 

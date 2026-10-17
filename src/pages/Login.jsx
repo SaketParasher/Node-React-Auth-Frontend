@@ -38,27 +38,59 @@ const Login = () => {
     }
 
     return (
-        <div className='login' style={{ textAlign: 'center' }}>
-            <h2>Login Form</h2>
-            <form action={formAction}>
-                <div>
-                    <p><label htmlFor='email'>Email: </label></p>
-                    <input type='email' required name='email'
-                        id='email' placeholder='Email...' disabled={isPending} />
-                </div>
-                <div>
-                    <p><label htmlFor='password'>Password: </label></p>
-                    <input type='password' required name='password'
-                        id='password' placeholder='Password...' disabled={isPending} />
-                </div>
-                {state?.error && <p style={{ color: 'red' }}>{state.error}</p>}
-                {isPending && <p>Loading...</p>}
-                <div style={{ marginTop: '10px' }}>
-                    <button type='submit' disabled={isPending}>Submit</button>
-                    <Link to="/signup">New User? Signup</Link>
-                </div>
-            </form>
+        <div className="auth-page">
+            <div className="auth-card">
+                <h2>Welcome back</h2>
+                <p className="auth-description">
+                    Login to continue to your account.
+                </p>
 
+                <form action={formAction}>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            required
+                            name="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            disabled={isPending}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            required
+                            name="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            disabled={isPending}
+                        />
+                    </div>
+
+                    {state?.error && (
+                        <div className="message message-error">{state.error}</div>
+                    )}
+
+                    {isPending && (
+                        <p className="loading-text">Signing in...</p>
+                    )}
+
+                    <div className="form-actions">
+                        <button
+                            className="btn btn-primary"
+                            type="submit"
+                            disabled={isPending}
+                        >
+                            {isPending ? 'Signing in...' : 'Login'}
+                        </button>
+
+                        <Link to="/signup">New user? Create account</Link>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

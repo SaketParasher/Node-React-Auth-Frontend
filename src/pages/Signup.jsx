@@ -22,52 +22,98 @@ const Signup = () => {
             if (signupResponse.success) {
                 return {
                     ...prevState,
-                    error: false,
+                    error: null,
                     success: true
                 }
             }
 
             return {
                 ...prevState,
-                error: signupResponse.message
+                error: signupResponse.message,
+                success: false
             }
         } catch (error) {
             console.log('Error in Signup : ', error)
             return {
                 ...prevState,
-                error: error.message
+                error: error.message,
+                success: false
             }
         }
     }
 
     return (
-        <div className='signup' style={{ textAlign: 'center' }}>
-            <h2>Signup Form</h2>
-            <form action={formAction}>
-                <div>
-                    <p><label htmlFor='name'>Name: </label></p>
-                    <input type='text' required name='name'
-                        id='name' placeholder='User name...' disabled={isPending} />
-                </div>
-                <div>
-                    <p><label htmlFor='email'>Email: </label></p>
-                    <input type='email' required name='email'
-                        id='email' placeholder='Login Email...' disabled={isPending} />
-                </div>
-                <div>
-                    <p><label htmlFor='password'>Password: </label></p>
-                    <input type='password' required name='password'
-                        id='password' placeholder='Login Password...' disabled={isPending} />
-                </div>
-                {state?.error && <p style={{ color: 'red' }}>{state.error}</p>}
-                {isPending && <p>Loading...</p>}
-                {state?.success && <p style={{ color: 'green' }}>
-                    <span>Signup Success. Please Login</span>
-                    <Link to="/login">Go to Login</Link>
-                </p>}
-                <button type='submit' disabled={isPending}>Submit</button>
-            </form>
+        <div className="auth-page">
+            <div className="auth-card">
+                <h2>Create account</h2>
+                <p className="auth-description">
+                    Enter your details to create a new account.
+                </p>
 
+                <form action={formAction}>
+                    <div className="form-group">
+                        <label htmlFor="name">Name</label>
+                        <input
+                            type="text"
+                            required
+                            name="name"
+                            id="name"
+                            placeholder="Your name"
+                            disabled={isPending}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            required
+                            name="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            disabled={isPending}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            required
+                            name="password"
+                            id="password"
+                            placeholder="Create a password"
+                            disabled={isPending}
+                        />
+                    </div>
+
+                    {state?.error && (
+                        <div className="message message-error">{state.error}</div>
+                    )}
+
+                    {state?.success && (
+                        <div className="message message-success">
+                            Signup successful. <Link to="/login">Go to Login</Link>
+                        </div>
+                    )}
+
+                    {isPending && (
+                        <p className="loading-text">Creating account...</p>
+                    )}
+
+                    <div className="form-actions">
+                        <button
+                            className="btn btn-primary"
+                            type="submit"
+                            disabled={isPending}
+                        >
+                            {isPending ? 'Creating...' : 'Sign up'}
+                        </button>
+
+                        <Link to="/login">Already have an account?</Link>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

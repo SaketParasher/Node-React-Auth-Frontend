@@ -1,5 +1,5 @@
 
-// import './App.css'
+import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Admin from './pages/Admin'
 import AdminUsers from './pages/AdminUsers'

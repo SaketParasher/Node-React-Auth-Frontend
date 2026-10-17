@@ -1,15 +1,23 @@
-import React from 'react'
 import { Outlet } from 'react-router-dom'
+import './AppLayout.css'
 
 const PublicLayout = () => {
     return (
-        <>
-            <header>Public Layout</header>
-            <main>
+        <div className="public-shell">
+            <header className="public-header">
+                <div className="public-brand">
+                    React Node Auth
+                </div>
+            </header>
+
+            <main className="public-main">
                 <Outlet />
             </main>
-            <footer> 🚀🚀 React Node Auth App -  @Copyright 2026</footer>
-        </>
+
+            <footer className="app-footer">
+                🚀 React Node Auth App · © 2026
+            </footer>
+        </div>
     )
 }
 

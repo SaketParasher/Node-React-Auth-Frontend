@@ -1,19 +1,22 @@
-import React from 'react'
-import { useAuth } from '../context/AuthContext'
 import { Navigate, Outlet } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 const RoleRoute = ({ role }) => {
     const { isAuthenticated, isLoading, user } = useAuth()
-    const isAccessAllowed = user?.role === role
 
-    return (
-        <div>
-            {isLoading && <p>Loading....</p>}
-            {!isLoading && !isAuthenticated && <Navigate to='/login' replace />}
-            {!isLoading && isAuthenticated && !isAccessAllowed && <Navigate to="/unauthorized" replace />}
-            {!isLoading && isAuthenticated && isAccessAllowed && <Outlet />}
-        </div>
-    )
+    if (isLoading) {
+        return <p>Loading...</p>
+    }
+
+    if (!isAuthenticated) {
+        return <Navigate to="/login" replace />
+    }
+
+    if (user?.role !== role) {
+        return <Navigate to="/unauthorized" replace />
+    }
+
+    return <Outlet />
 }
 
 export default RoleRoute

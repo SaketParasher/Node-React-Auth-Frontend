@@ -33,18 +33,35 @@ const ApiPlayground = () => {
     }
 
     return (
-        <div style={{ textAlign: 'center' }}>
-            <h2>API PLAYGROUND</h2>
+        <div className="page">
+            <div className="page-header">
+                <h1 className="page-title">API Playground</h1>
+                <p className="page-subtitle">
+                    Test the authenticated profile API.
+                </p>
+            </div>
 
-            <button onClick={getProfile}>GET PROFILE</button>
+            <div className="card api-playground">
+                <button
+                    className="btn btn-primary"
+                    onClick={getProfile}
+                    disabled={isLoading}
+                >
+                    {isLoading ? 'Loading...' : 'GET /api/profile'}
+                </button>
 
-            {isLoading && <div>Loading...</div>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {user && <div>
-                {JSON.stringify(user)}
-            </div>}
+                {error && (
+                    <div className="message message-error">
+                        {error}
+                    </div>
+                )}
 
-
+                {user && (
+                    <pre className="api-result">
+                        {JSON.stringify(user, null, 2)}
+                    </pre>
+                )}
+            </div>
         </div>
     )
 }

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
 
 const users = [
@@ -22,14 +21,34 @@ const users = [
 
 const AdminUsers = () => {
     return (
-        <div>
-            <ul>
-                {users.map(user => (
-                    <li key={user.id}><Link to={`${user.id}`} state={{ source: 'admin-users' }}>{user.id} : {user.name}</Link></li>
-                ))}
-            </ul>
-            <hr />
-            <Outlet />
+        <div className="page">
+            <div className="page-header">
+                <h1 className="page-title">Admin Users</h1>
+                <p className="page-subtitle">
+                    Select a user to view route parameter details.
+                </p>
+            </div>
+
+            <div className="card">
+                <ul className="user-list">
+                    {users.map((user) => (
+                        <li key={user.id}>
+                            <Link
+                                className="user-link"
+                                to={`${user.id}`}
+                                state={{ source: 'admin-users' }}
+                            >
+                                <span>{user.name}</span>
+                                <span className="text-muted">ID: {user.id}</span>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div className="section-gap">
+                <Outlet />
+            </div>
         </div>
     )
 }
