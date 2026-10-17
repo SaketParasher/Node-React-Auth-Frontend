@@ -11,7 +11,7 @@ const Dashboard = () => {
             <div className="page-header">
                 <h1 className="page-title">Dashboard</h1>
                 <p className="page-subtitle">
-                    Authentication and user information.
+                    Authentication / user information.
                 </p>
             </div>
 
